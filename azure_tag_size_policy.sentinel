@@ -1,0 +1,30 @@
+# Mandatory policy for defining tags
+mandatory_tags = rule {
+  all attribute_names {
+    startswith(attribute_name, "tags.")
+  }
+}
+
+# Advisory policy for allowed VM instance sizes
+allowed_vm_sizes = rule {
+  all attribute_values.cpu_vm_sizes as size {
+    not contains(["Standard_B1s", "Standard_B2s", "Standard_D2s_v3", "Standard_D4s_v3"], size)
+  }
+}
+
+# Policy set combining the mandatory and advisory policies
+policy_set "azure_policy_set" {
+  policies = [
+    {
+      name        = "mandatory_tags_policy"
+      enforcement = "mandatory"
+      rules       = { mandatory_tags }
+    },
+    {
+      name        = "allowed_vm_sizes_policy"
+      enforcement = "advisory"
+      rules       = { allowed_vm_sizes }
+    }
+  ]
+}
+
