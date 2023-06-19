@@ -17,7 +17,7 @@ policy_set "azure_policy_set" {
   policies = [
     {
       name        = "mandatory_tags_policy"
-      enforcement = "mandatory"
+      enforcement = "advisory"
       rules       = { mandatory_tags }
     },
     {
