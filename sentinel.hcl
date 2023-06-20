@@ -1,4 +1,5 @@
 # Configure the Azure provider
+
 provider "azure" {
   version = ">= 2.0.0"
 }
@@ -14,7 +15,9 @@ policy_sets = [
 
 # Define the policy declarations
 main = sentinel {
+
   import "azure/cost-analysis"
+
 
   # Define the allowed monthly cost threshold
   allowed_monthly_cost = 100
@@ -27,4 +30,6 @@ main = sentinel {
     }
   }
 }
+
+
 
